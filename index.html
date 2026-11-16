@@ -623,10 +623,24 @@
             element.classList.add('active');
         }
 
-        function submitAssignment(e, level) {
-            e.preventDefault();
-            alert("Assignment submitted successfully! Instructor Charles Makori will review it and provide simplified feedback shortly.");
-            e.target.reset();
+ function submitAssignment(e, level) {
+    e.preventDefault();
+    
+    // Get the selected grade/subject and the textarea content
+    const selectField = e.target.querySelector('select');
+    const textareaField = e.target.querySelector('textarea');
+    const selectedOption = selectField ? selectField.value : level;
+    const assignmentText = textareaField ? textareaField.value : "";
+    
+    // Create the message for your WhatsApp
+    const message = `Hello Sir Charles, here is my assignment submission for ${level} - ${selectedOption}:\n\n${assignmentText}`;
+    
+    // Open WhatsApp with the pre-filled message sent directly to you (+254 108 753 049)
+    window.open("https://wa.me/254108753049?text=" + encodeURIComponent(message), "_blank");
+    
+    alert("Redirecting to WhatsApp to send your assignment to Instructor Charles Makori!");
+    e.target.reset();
+} 
         }
 function buyTutorial(title) {
         let confirmed = confirm("To unlock '" + title + "', please send KSH 50 to M-Pesa Line: 0769765694 (Charles nyamao).\n\nClick OK to automatically open WhatsApp and send your payment confirmation code for access!");
